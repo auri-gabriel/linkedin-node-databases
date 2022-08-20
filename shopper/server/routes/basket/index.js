@@ -31,16 +31,13 @@ module.exports = (config) => {
     return res.render('basket', { items });
   });
 
-  router.get('/remove/:itemId', async (req, res, next) => {
-    return next('Not implemented');
-
-    /*
+  router.get('/remove/:itemId', async (req, res) => {
     if (!res.locals.currentUser) {
       req.session.messages.push({
-        type: "warning",
-        text: "Please log in first",
+        type: 'warning',
+        text: 'Please log in first',
       });
-      return res.redirect("/shop");
+      return res.redirect('/shop');
     }
 
     try {
@@ -50,20 +47,19 @@ module.exports = (config) => {
       );
       await basket.remove(req.params.itemId);
       req.session.messages.push({
-        type: "success",
-        text: "The item was removed from the the basket",
+        type: 'success',
+        text: 'The item was removed from the the basket',
       });
     } catch (err) {
       req.session.messages.push({
-        type: "danger",
-        text: "There was an error removing the item from the basket",
+        type: 'danger',
+        text: 'There was an error removing the item from the basket',
       });
       console.error(err);
-      return res.redirect("/basket");
+      return res.redirect('/basket');
     }
 
-    return res.redirect("/basket");
-    */
+    return res.redirect('/basket');
   });
 
   router.get('/buy', async (req, res, next) => {

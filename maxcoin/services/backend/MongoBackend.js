@@ -71,9 +71,9 @@ class MongoBackend {
     console.timeEnd('mongodb-find');
 
     console.info('Disconnecting from MongoDB');
-    console.time('mongodb-dicosnnect');
+    console.time('mongodb-disconnect');
     await this.disconnect();
-    console.timeEnd('mongodb-dicosnnect');
+    console.timeEnd('mongodb-disconnect');
     return {
       date: doc.date,
       value: doc.value,

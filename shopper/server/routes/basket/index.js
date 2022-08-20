@@ -1,18 +1,17 @@
-const express = require("express");
+const express = require('express');
+const ItemService = require('../../services/UserService');
+const BasketService = require('../../services/BasketService');
 
-module.exports = () => {
+module.exports = (config) => {
   const router = express.Router();
 
-  router.get("/", async (req, res) => {
-    return res.render("basket", {});
-
-    /*
+  router.get('/', async (req, res) => {
     if (!res.locals.currentUser) {
       req.session.messages.push({
-        type: "warning",
-        text: "Please log in first",
+        type: 'warning',
+        text: 'Please log in first',
       });
-      return res.redirect("/shop");
+      return res.redirect('/shop');
     }
     const basket = new BasketService(
       config.redis.client,
@@ -29,12 +28,11 @@ module.exports = () => {
         })
       );
     }
-    return res.render("basket", { items });
-    */
+    return res.render('basket', { items });
   });
 
-  router.get("/remove/:itemId", async (req, res, next) => {
-    return next("Not implemented");
+  router.get('/remove/:itemId', async (req, res, next) => {
+    return next('Not implemented');
 
     /*
     if (!res.locals.currentUser) {
@@ -68,8 +66,8 @@ module.exports = () => {
     */
   });
 
-  router.get("/buy", async (req, res, next) => {
-    return next("Not implemented");
+  router.get('/buy', async (req, res, next) => {
+    return next('Not implemented');
     /*
     if (!res.locals.currentUser) {
       req.session.messages.push({

@@ -64,15 +64,13 @@ module.exports = (config) => {
     return res.redirect('/basket');
   });
 
-  router.get('/buy', async (req, res, next) => {
-    return next('Not implemented');
-    /*
+  router.get('/buy', async (req, res) => {
     if (!res.locals.currentUser) {
       req.session.messages.push({
-        type: "warning",
-        text: "Please log in first",
+        type: 'warning',
+        text: 'Please log in first',
       });
-      return res.redirect("/shop");
+      return res.redirect('/shop');
     }
     try {
       const userId = res.locals.currentUser.id;
@@ -84,7 +82,7 @@ module.exports = (config) => {
 
       // be defensive
       if (!basketItems) {
-        throw new Error("No items found in basket");
+        throw new Error('No items found in basket');
       }
 
       // Find the item for each basket entry and add the quantity to it
@@ -114,20 +112,19 @@ module.exports = (config) => {
       });
 
       req.session.messages.push({
-        type: "success",
-        text: "Thank you for your business",
+        type: 'success',
+        text: 'Thank you for your business',
       });
 
-      return res.redirect("/basket");
+      return res.redirect('/basket');
     } catch (err) {
       req.session.messages.push({
-        type: "danger",
-        text: "There was an error finishing your order",
+        type: 'danger',
+        text: 'There was an error finishing your order',
       });
       console.error(err);
-      return res.redirect("/basket");
+      return res.redirect('/basket');
     }
-    */
   });
 
   return router;

@@ -1,5 +1,5 @@
 const express = require('express');
-const ItemService = require('../../services/UserService');
+const ItemService = require('../../services/ItemService');
 const BasketService = require('../../services/BasketService');
 
 module.exports = (config) => {

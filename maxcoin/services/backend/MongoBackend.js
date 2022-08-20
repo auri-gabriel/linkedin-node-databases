@@ -8,7 +8,7 @@ const CoinAPI = require('../CoinAPI');
 class MongoBackend {
   constructor() {
     this.coinAPI = new CoinAPI();
-    this.mongoUrl = 'mongodb://localhost:55000/maxcoin';
+    this.mongoUrl = 'mongodb://localhost:37017/maxcoin';
     this.client = null;
     this.collection = null;
   }
@@ -31,7 +31,17 @@ class MongoBackend {
     return false;
   }
 
-  async insert() {}
+  async insert() {
+    const data = await this.coinAPI.fetch();
+    const documents = [];
+    Object.entries(data.bpi).forEach((entry) => {
+      documents.push({
+        date: entry[0],
+        value: entry[1],
+      });
+    });
+    return this.collection.insertMany(documents);
+  }
 
   async getMax() {}
 
@@ -45,6 +55,13 @@ class MongoBackend {
       throw new Error('Connecting to MongoDB failed');
     }
     console.timeEnd('mongodb-connect');
+
+    console.info('Inserting into MongoDB');
+    console.time('mongodb-insert');
+    const insertResult = await this.insert();
+    console.timeEnd('mongodb-insert');
+
+    console.info(`Inserted ${insertResult.result.n} documents into mongodb`);
 
     console.info('Disconnecting from MongoDB');
     console.time('mongodb-dicosnnect');
